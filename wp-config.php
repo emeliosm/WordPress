@@ -18,6 +18,36 @@
  * @package WordPress
  */
 
+// ** Database settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+
+// Get the current domain name
+$server_name = $_SERVER['SERVER_NAME'] ?? '';
+
+// Detect the environment based on the domain
+if ($server_name === 'dev.uyamot.org') {
+    $environment = 'staging';
+} elseif ($server_name === 'www.uyamot.org' || $server_name === 'uyamot.org') {
+    $environment = 'production';
+} else {
+    $environment = 'local'; // Default to local if no match
+}
+
+// Define environment-specific configuration files
+$config_files = [
+    'local'      => __DIR__ . '/wp-config-local.php',
+    'staging'    => __DIR__ . '/wp-config-staging.php',
+    'production' => __DIR__ . '/wp-config-production.php',
+];
+
+// Check if the environment-specific config file exists and load it
+if (isset($config_files[$environment]) && file_exists($config_files[$environment])) {
+    echo "Current Config File: " . $config_files[$environment] . "<br>";
+    require_once $config_files[$environment];
+} else {
+    die("Error: No valid configuration file found for environment: " . htmlspecialchars($environment));
+}
+
 
 /**#@+
  * Authentication unique keys and salts.
@@ -84,9 +114,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
 
-// Get the current domain name
-$server_name = $_SERVER['SERVER_NAME'] ?? '';
-
 if (
     $server_name === 'uyamot.org' || 
     $server_name === 'www.uyamot.org' || 
@@ -101,27 +128,4 @@ if (
     define('WP_AUTO_UPDATE_CORE', true);
     define('DISALLOW_FILE_MODS', false);
     define('DISALLOW_FILE_EDIT', false);
-}
-
-// Detect the environment based on the domain
-if ($server_name === 'dev.uyamot.org') {
-    $environment = 'staging';
-} elseif ($server_name === 'www.uyamot.org' || $server_name === 'uyamot.org') {
-    $environment = 'production';
-} else {
-    $environment = 'local'; // Default to local if no match
-}
-
-// Define environment-specific configuration files
-$config_files = [
-    'local'      => __DIR__ . '/wp-config-local.php',
-    'staging'    => __DIR__ . '/wp-config-staging.php',
-    'production' => __DIR__ . '/wp-config-production.php',
-];
-
-// Check if the environment-specific config file exists and load it
-if (isset($config_files[$environment]) && file_exists($config_files[$environment])) {
-    require_once $config_files[$environment];
-} else {
-    die("Error: No valid configuration file found for environment: " . htmlspecialchars($environment));
 }
