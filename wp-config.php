@@ -18,24 +18,6 @@
  * @package WordPress
  */
 
-// ** Database settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define( 'DB_NAME', 'u162094946_bGADn' );
-
-/** Database username */
-define( 'DB_USER', 'u162094946_T7khD' );
-
-/** Database password */
-define( 'DB_PASSWORD', 'LOdCo9s1k1' );
-
-/** Database hostname */
-define( 'DB_HOST', 'localhost' );
-
-/** Database charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8mb4' );
-
-/** The database collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', '' );
 
 /**#@+
  * Authentication unique keys and salts.
@@ -116,3 +98,33 @@ if (
     define('DISALLOW_FILE_MODS', false);
     define('DISALLOW_FILE_EDIT', false);
 }
+
+// Get the current domain name
+$server_name = $_SERVER['SERVER_NAME'] ?? '';
+
+// Detect the environment based on the domain
+if ($server_name === 'dev.uyamot.org') {
+    $environment = 'staging';
+} elseif ($server_name === 'www.uyamot.org' || $server_name === 'uyamot.org') {
+    $environment = 'production';
+} else {
+    $environment = 'local'; // Default to local if no match
+}
+
+// Define environment-specific configuration files
+$config_files = [
+    'local'      => __DIR__ . '/wp-config-local.php',
+    'staging'    => __DIR__ . '/wp-config-staging.php',
+    'production' => __DIR__ . '/wp-config-production.php',
+];
+
+// Check if the environment-specific config file exists and load it
+if (isset($config_files[$environment]) && file_exists($config_files[$environment])) {
+    require_once $config_files[$environment];
+} else {
+    die("Error: No valid configuration file found for environment: " . htmlspecialchars($environment));
+}
+
+// Stop WordPress from defining default database settings
+define('DB_COLLATE', '');
+define('DB_CHARSET', 'utf8mb4');
