@@ -26,46 +26,35 @@ $server_name = $_SERVER['SERVER_NAME'] ?? '';
 
 // Detect the environment based on the domain
 if ($server_name === 'dev.uyamot.org') {
-
+    
     define( 'DB_NAME', 'u162094946_bGADn' );
     /** Database username */
     define( 'DB_USER', 'u162094946_T7khD' );
     /** Database password */
     define( 'DB_PASSWORD', '3;??4S$bG' );
 
-    echo 'this isthis isthis isthis isthis isthis isthis isthis isthis is' . $server_name;
-
-
 } elseif ($server_name === 'www.uyamot.org' || $server_name === 'uyamot.org') {
-
+    
     define( 'DB_NAME', 'u162094946_KM5TM' );
     /** Database username */
     define( 'DB_USER', 'u162094946_Qj1wA' );
     /** Database password */
     define( 'DB_PASSWORD', ']hP!v/9R?2G4' );
 
-    echo 'this isthis isthis isthis isthis isthis isthis isthis isthis is' . $server_name;
-
-
 } elseif ($server_name === 'localhost'){
-
+    
     define( 'DB_NAME', 'local' );
     /** Database username */
     define( 'DB_USER', 'root' );
     /** Database password */
     define( 'DB_PASSWORD', 'root' );
 
-
-    echo 'this isthis isthis isthis isthis isthis isthis isthis isthis is' . $server_name;
-
 }
-
-    /** Database charset to use in creating database tables. */
+    
+/** Database charset to use in creating database tables. */
     define( 'DB_CHARSET', 'utf8' );
-
     /** The database collate type. Don't change this if in doubt. */
     define( 'DB_COLLATE', '' );
-
     /** Database hostname */
     define( 'DB_HOST', 'localhost' );
 
@@ -135,18 +124,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
 
-if (
-    $server_name === 'uyamot.org' || 
-    $server_name === 'www.uyamot.org' || 
-    $server_name === 'dev.uyamot.org'
-) {
+if ($server_name === 'uyamot.org' || $server_name === 'www.uyamot.org' || $server_name === 'dev.uyamot.org') {
+    
     // Disable updates on live and staging
     define('WP_AUTO_UPDATE_CORE', false);
     define('DISALLOW_FILE_MODS', true);
     define('DISALLOW_FILE_EDIT', true);
+
 } else {
+    
     // Enable updates on other environments (if needed)
     define('WP_AUTO_UPDATE_CORE', true);
     define('DISALLOW_FILE_MODS', false);
     define('DISALLOW_FILE_EDIT', false);
+    
 }
