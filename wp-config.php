@@ -83,10 +83,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
 
+// Get the current domain name
+$server_name = $_SERVER['SERVER_NAME'] ?? '';
+
 if (
-    $_SERVER['HTTP_HOST'] === 'uyamot.org' || 
-    $_SERVER['HTTP_HOST'] === 'www.uyamot.org' || 
-    $_SERVER['HTTP_HOST'] === 'dev.uyamot.org'
+    $server_name === 'uyamot.org' || 
+    $server_name === 'www.uyamot.org' || 
+    $server_name === 'dev.uyamot.org'
 ) {
     // Disable updates on live and staging
     define('WP_AUTO_UPDATE_CORE', false);
@@ -98,9 +101,6 @@ if (
     define('DISALLOW_FILE_MODS', false);
     define('DISALLOW_FILE_EDIT', false);
 }
-
-// Get the current domain name
-$server_name = $_SERVER['SERVER_NAME'] ?? '';
 
 // Detect the environment based on the domain
 if ($server_name === 'dev.uyamot.org') {
@@ -124,7 +124,3 @@ if (isset($config_files[$environment]) && file_exists($config_files[$environment
 } else {
     die("Error: No valid configuration file found for environment: " . htmlspecialchars($environment));
 }
-
-// Stop WordPress from defining default database settings
-define('DB_COLLATE', '');
-define('DB_CHARSET', 'utf8mb4');
