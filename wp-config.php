@@ -100,3 +100,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+
+if (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) {
+    // Enable updates on staging
+    define('WP_AUTO_UPDATE_CORE', true);
+    define('DISALLOW_FILE_MODS', false);
+    define('DISALLOW_FILE_EDIT', false);
+} else {
+    // Disable updates on live
+    define('WP_AUTO_UPDATE_CORE', false);
+    define('DISALLOW_FILE_MODS', true);
+    define('DISALLOW_FILE_EDIT', true);
+}
