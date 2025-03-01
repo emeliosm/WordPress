@@ -33,7 +33,7 @@ if ($server_name === 'dev.uyamot.org') {
     $environment = 'local'; // Default to local if no match
 }
 
-echo $server_name;
+echo "Current Config File: " . $server_name . "<br>";
 
 // Define environment-specific configuration files
 $config_files = [
