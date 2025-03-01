@@ -42,7 +42,7 @@ $config_files = [
 
 // Check if the environment-specific config file exists and load it
 if (isset($config_files[$environment]) && file_exists($config_files[$environment])) {
-    echo "Current Config File: " . $config_files[$environment] . "<br>";
+    // echo "Current Config File: " . $config_files[$environment] . "<br>";
     require_once $config_files[$environment];
 } else {
     die("Error: No valid configuration file found for environment: " . htmlspecialchars($environment));
