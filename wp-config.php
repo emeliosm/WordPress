@@ -28,56 +28,37 @@ $server_name = $_SERVER['SERVER_NAME'] ?? '';
 if ($server_name === 'dev.uyamot.org') {
 
     define( 'DB_NAME', 'u162094946_bGADn' );
-
     /** Database username */
     define( 'DB_USER', 'u162094946_T7khD' );
-
     /** Database password */
     define( 'DB_PASSWORD', '3;??4S$bG' );
 
-    /** Database hostname */
-    define( 'DB_HOST', 'localhost' );
-
-    /** Database charset to use in creating database tables. */
-    define( 'DB_CHARSET', 'utf8' );
-
-    /** The database collate type. Don't change this if in doubt. */
-    define( 'DB_COLLATE', '' );
-
+    echo 'this isthis isthis isthis isthis isthis isthis isthis isthis is' . $server_name;
 
 
 } elseif ($server_name === 'www.uyamot.org' || $server_name === 'uyamot.org') {
 
     define( 'DB_NAME', 'u162094946_KM5TM' );
-
     /** Database username */
     define( 'DB_USER', 'u162094946_Qj1wA' );
-    
     /** Database password */
     define( 'DB_PASSWORD', ']hP!v/9R?2G4' );
-    
-    /** Database hostname */
-    define( 'DB_HOST', 'localhost' );
-    
-    /** Database charset to use in creating database tables. */
-    define( 'DB_CHARSET', 'utf8' );
-    
-    /** The database collate type. Don't change this if in doubt. */
-    define( 'DB_COLLATE', '' );
+
+    echo 'this isthis isthis isthis isthis isthis isthis isthis isthis is' . $server_name;
 
 
-} else {
+} elseif ($server_name === 'localhost'){
 
     define( 'DB_NAME', 'local' );
-
     /** Database username */
     define( 'DB_USER', 'root' );
-
     /** Database password */
     define( 'DB_PASSWORD', 'root' );
 
-    /** Database hostname */
-    define( 'DB_HOST', 'localhost' );
+
+    echo 'this isthis isthis isthis isthis isthis isthis isthis isthis is' . $server_name;
+
+}
 
     /** Database charset to use in creating database tables. */
     define( 'DB_CHARSET', 'utf8' );
@@ -85,24 +66,8 @@ if ($server_name === 'dev.uyamot.org') {
     /** The database collate type. Don't change this if in doubt. */
     define( 'DB_COLLATE', '' );
 
-}
-
-echo "Current Config File: " . $server_name . "<br>";
-
-// // Define environment-specific configuration files
-// $config_files = [
-//     'local'      => __DIR__ . '/wp-config-local.php',
-//     'staging'    => __DIR__ . '/wp-config-staging.php',
-//     'production' => __DIR__ . '/wp-config-production.php',
-// ];
-
-// // Check if the environment-specific config file exists and load it
-// if (isset($config_files[$environment]) && file_exists($config_files[$environment])) {
-//     // echo "Current Config File: " . $config_files[$environment] . "<br>";
-//     require_once $config_files[$environment];
-// } else {
-//     die("Error: No valid configuration file found for environment: " . htmlspecialchars($environment));
-// }
+    /** Database hostname */
+    define( 'DB_HOST', 'localhost' );
 
 
 /**#@+
