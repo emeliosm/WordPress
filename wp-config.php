@@ -33,6 +33,8 @@ if ($server_name === 'dev.uyamot.org') {
     $environment = 'local'; // Default to local if no match
 }
 
+echo $server_name;
+
 // Define environment-specific configuration files
 $config_files = [
     'local'      => __DIR__ . '/wp-config-local.php',
