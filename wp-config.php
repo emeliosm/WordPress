@@ -101,14 +101,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
 
-if (strpos($_SERVER['HTTP_HOST'], 'dev.uyamot.org') !== false) {
-    // Enable updates on staging
-    define('WP_AUTO_UPDATE_CORE', true);
-    define('DISALLOW_FILE_MODS', false);
-    define('DISALLOW_FILE_EDIT', false);
-} else {
-    // Disable updates on live
+if (
+    $_SERVER['HTTP_HOST'] === 'uyamot.org' || 
+    $_SERVER['HTTP_HOST'] === 'www.uyamot.org' || 
+    $_SERVER['HTTP_HOST'] === 'dev.uyamot.org'
+) {
+    // Disable updates on live and staging
     define('WP_AUTO_UPDATE_CORE', false);
     define('DISALLOW_FILE_MODS', true);
     define('DISALLOW_FILE_EDIT', true);
+} else {
+    // Enable updates on other environments (if needed)
+    define('WP_AUTO_UPDATE_CORE', true);
+    define('DISALLOW_FILE_MODS', false);
+    define('DISALLOW_FILE_EDIT', false);
 }
